@@ -43,7 +43,7 @@
                                     <th class="none">Alamat</th>
                                     <th class="notexport none">Jam Operasional Pasar</th>
                                 </tr>
-                                </thead>
+                            </thead>
                                 <tbody>
                                     @foreach ($pasar as $no=>$p)
                                         <tr>

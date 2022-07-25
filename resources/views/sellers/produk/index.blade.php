@@ -1,4 +1,4 @@
-@extends('sellers/master-sellers')
+@extends('sellers.master-sellers')
 @section('content')
 @php session()->forget('pin'); @endphp
     <div class="content-wrapper">

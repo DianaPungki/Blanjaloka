@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Customers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Models\Pasar;
+use App\Models\Penjual;
+use App\Models\ProdukModels;
 use Illuminate\Support\Facades\DB;
 use Laravolt\Indonesia\Models\Province;
 
@@ -14,11 +17,13 @@ class Dashboard extends Controller
     public function index(){
 
         $data = [
+            'title' => 'Beranda',
             'pasar' => Pasar::all(),
             'provinsi' => Province::pluck('name', 'code'),
+            'kategori' => Kategori::all()
         ];
 
-        return view('web/pembeli/beranda/index')->with(['title'=>'Beranda', 'data'=>$data]);
+        return view('web/pembeli/beranda/index')->with($data);
 
     }
 
@@ -44,5 +49,5 @@ class Dashboard extends Controller
         ]);
 
     }
-    
+
 }

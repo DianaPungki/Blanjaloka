@@ -38,7 +38,7 @@
                                                 </div>
                                             </div>
                                             <div class="p-5">
-                                                @foreach($data['pasar'] as $p)
+                                                @foreach($pasar as $p)
                                                     @php
                                                         $foto = explode(',', $p->foto_pasar);
                                                     @endphp
@@ -59,7 +59,7 @@
                                                                 <div class="keterangan-pasar py-1">
                                                                     <p class="mb-0 text-secondary">
                                                                         <i class="bi bi-geo-alt-fill me-1"></i> 
-                                                                        @foreach($data['provinsi'] as $id=>$name)
+                                                                        @foreach($provinsi as $id=>$name)
                                                                             @if($id == $p->provinsi)
                                                                                 {{ucfirst(strtolower($name))}}
                                                                             @endif

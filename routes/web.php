@@ -5,6 +5,12 @@ use App\Http\Controllers\Homepage;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\Customers\Dashboard as DashboardCustomers;
 use App\Http\Controllers\Customers\Setting as SettingCustomers;
+use App\Http\Controllers\Customers\KategoriController as KategoriCustomers;
+use App\Http\Controllers\Customers\ProdukfavoritController as FavoritCustomers;
+use App\Http\Controllers\Customers\KeranjangController as KeranjangCustomers;
+use App\Http\Controllers\Customers\ProdukController as ProdukCustomers;
+use App\Http\Controllers\Customers\OrderitemController as OrderCustomers;
+use app\Http\Controllers\Customers\TransaksiController as TransaksiCustomer;
 
 //---------------------------------------------------------------------
 use App\Http\Controllers\Admin\Dashboard as DashboardAdmin;
@@ -19,6 +25,7 @@ use App\Http\Controllers\Admin\Produk as ProdukAdmin;
 use App\Http\Controllers\Sellers\Dashboard as DashboardSellers;
 use App\Http\Controllers\Sellers\Produk as ProdukSellers;
 use App\Http\Controllers\Sellers\Setting as SettingSellers;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -177,6 +184,12 @@ Route::prefix('admin')->group(function () {
         Route::post('kategori/get', [ProdukAdmin::class, 'getkategoriproduk'])->middleware('sessionadmin');
         Route::post('kategori/update', [ProdukAdmin::class, 'updatekategoriproduk'])->middleware('sessionadmin');
         Route::post('kategori/delete', [ProdukAdmin::class, 'deletekategoriproduk'])->middleware('sessionadmin');
+        //  Satuan Produk
+        Route::get('satuan', [ProdukAdmin::class, 'satuanproduk'])->middleware('sessionadmin');
+        Route::post('satuan/insert', [ProdukAdmin::class, 'insertsatuanproduk'])->middleware('sessionadmin');
+        Route::post('satuan/get', [ProdukAdmin::class, 'getsatuanproduk'])->middleware('sessionadmin');
+        Route::post('satuan/update', [ProdukAdmin::class, 'updatesatuanproduk'])->middleware('sessionadmin');
+        Route::post('satuan/delete', [ProdukAdmin::class, 'deletesatuanproduk'])->middleware('sessionadmin');
     });
 });
 
@@ -248,6 +261,32 @@ Route::prefix('sellers')->group(function () {
 Route::get('/index', [DashboardCustomers::class, 'index'])->middleware('sessionusers');
 Route::post('pasar/detail', [DashboardCustomers::class, 'getdetailpasar'])->middleware('sessionusers');
 Route::post('pasar/terapkan', [DashboardCustomers::class, 'terapkanpasar'])->middleware('sessionusers');
+
+// Kategori Pasar
+Route::get('kategori/{id}', [KategoriCustomers::class, 'index'])->middleware('sessionusers');
+
+// favorit
+Route::get('favorit', [FavoritCustomers::class, 'index'])->middleware('sessionusers');
+Route::get('favorit/{id}', [FavoritCustomers::class, 'store'])->name('favorit_simpan')->middleware('sessionusers');
+
+// produk
+Route::get('produk', [ProdukCustomers::class, 'detail'])->middleware('sessionusers');
+
+// keranjang
+Route::get('keranjang', [KeranjangCustomers::class, 'index'])->middleware('sessionusers');
+Route::get('keranjang/{id}', [KeranjangCustomers::class, 'store'])->middleware('sessionusers');
+Route::get('keranjang/kuantitasp/{id}', [KeranjangCustomers::class, 'kuantitasplus'])->middleware('sessionusers');
+Route::get('keranjang/kuantitasm/{id}', [KeranjangCustomers::class, 'kuantitasminus'])->middleware('sessionusers');
+Route::get('keranjang/hapus/{id}', [KeranjangCustomers::class, 'destroy'])->middleware('sessionusers');
+
+// order
+Route::post('order', [OrderCustomers::class, 'store'])->middleware('sessionusers');
+Route::get('order', [OrderCustomers::class, 'index'])->middleware('sessionusers');
+Route::get('order/hapus/{id}', [OrderCustomers::class, 'destroy'])->middleware('sessionusers');
+
+Route::post('payments/midtrans-notification', [TransaksiCustomer::class, 'receive']);
+
+
 # Setting Customers
 Route::prefix('setting')->group(function () {
     # Laman Profil
@@ -264,3 +303,6 @@ Route::prefix('setting')->group(function () {
     Route::post('ubahpassword/update', [SettingCustomers::class, 'ubahpassword_handler'])->middleware('sessionusers');
 
 });
+
+// Midtrans
+Route::resource('transaksi', Transaksi::class)->only(['index', 'show']);

@@ -1,123 +1,18 @@
 {{-- semua view yang dibuat didalam folder web harus di extend kan dengan file master --}}
-@extends('web/master')
+@extends('web.master')
 @section('content')
 
     <!-- CAROUSEL BANNER -->
-    <section>
-        <div class="container pt-4 pt-xl-5 mt-0 mt-xl-5">
-            <div id="carouselExampleDark" class="carousel carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
-                        class="active indicator-dot" aria-current="true" aria-label="Slide 1"></button>
-                    <button class="indicator-dot" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button class="indicator-dot" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner bi bi-dot">
-                    <div class="carousel-item active" data-bs-interval="10000">
-                        <img src="{{ asset('assets/blanjaloka/img/caousel-sayurs.png') }}" class="d-block w-100 rounded-3"
-                            alt="">
-                        <div class="carousel-caption position-absolute top-50 translate-middle-y text-start">
-                            <h1 class="mt-0 mt-xl-3 header-banner">Diskon 10% <br> Untuk Semua Member</h1>
-                            <p class="p-banner">Mulai pada awal 01 agustus sampai dengan 30 september 2021</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img src="{{ asset('assets/blanjaloka/img/caousel-sayurs.png') }}" class="d-block w-100 rounded-3"
-                            alt="">
-                        <div class="carousel-caption position-absolute top-50 translate-middle-y text-start">
-                            <h1 class="mt-0 mt-xl-3 header-banner">Diskon 10% <br> Untuk Semua Member</h1>
-                            <p class="p-banner">Mulai pada awal 01 agustus sampai dengan 30 september 2021</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('assets/blanjaloka/img/caousel-sayurs.png') }}" class="d-block w-100 rounded-3"
-                            alt="...">
-                        <div class="carousel-caption position-absolute top-50 translate-middle-y text-start">
-                            <h1 class="mt-0 mt-xl-3 header-banner">Diskon 10% <br> Untuk Semua Member</h1>
-                            <p class="p-banner">Mulai pada awal 01 agustus sampai dengan 30 september 2021</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle" type="button"
-                    data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                    <div class="bungkus-chevron shadow">
-                        <span class="bi bi-chevron-left fs-5 cai-color-text align-middle" aria-hidden="true"></span>
-                    </div>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next position-absolute top-50 start-100 translate-middle" type="button"
-                    data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                    <div class="bungkus-chevron shadow">
-                        <span class="bi bi-chevron-right fs-5 cai-color-text align-middle" aria-hidden="true"></span>
-                    </div>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
+    @include('web.partition.banner')
     <!-- END OF CAROUSEL BANNER -->
 
     <!-- Pilih Lokasi Pasar dan Banner add Kecil -->
-    @include('web/pembeli/beranda/pasar')
+    @include('web.pembeli.beranda.pasar')
     <!-- End of Pilih Lokasi Pasar dan Banner add Kecil -->
 
     <!-- KATEGORI SECTION -->
-    <section>
-        <div class="container" id="kategori">
-            <h3 class="mb-3">Kategori</h3>
-            <div class="d-flex justify-content-between justify-content-xl-between flex-wrap">
-                <a href="kategori.html">
-                    <div class="kategori-card mb-2 card border py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/sayuran-vec.svg') }}" class="mx-auto" alt="...">
-                        <p class="card-text text-center">Sayur</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/buah-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Buah</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/daging-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Daging</p>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/ikan-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Ikan</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/bahanPokok-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Bahan pokok</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/bumbu-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Bumbu</p>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="kategori-card mb-2 card py-3">
-                        <img src="{{ asset('assets/blanjaloka/img/makanan-vec.svg') }}" class="mx-auto mb-1" alt="...">
-                        <p class="card-text text-center">Makanan</p>
-                    </div>
-                </a>
-
-
-            </div>
-        </div>
-    </section>
+    @include('web.partition.kategori')
+    <!-- END KATEGORI SECTION -->
 
     <!-- ADS BANNER 2 -->
     <section class="mt-4 mt-xl-5">

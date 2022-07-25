@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
+use App\Models\SatuanProdukModel;
 use Illuminate\Support\Facades\Validator;
 
 class Produk extends Controller
@@ -102,6 +103,61 @@ class Produk extends Controller
 
         return response()->json([
             'pesan' => 'Berhasil Menghapus Data Kategori Produk'
+        ]);
+        
+    }
+
+    public function satuanproduk(){
+
+        $data = [
+            'satuan' =>SatuanProdukModel::all()
+        ];
+        return view('admin.produk.satuan_produk.index',$data)->with(['title' => 'Data Satuan Produk', 'sidebar' => 'Satuan Produk']);
+
+    }
+
+    #insert data satuan produk
+    public function insertsatuanproduk(Request $request){
+            
+        $data = [
+            'nama_satuan' => $request->post('nama_satuan')
+            ];
+    
+        SatuanProdukModel::create($data);
+
+        return response()->json(['pesan' => 'Berhasil Menambahkan satuan Produk']);
+    
+    }
+
+    # mendapatkan data satuan produk berdasarkan id
+    public function getsatuanproduk(Request $request){
+        return response()->json(
+            SatuanProdukModel::where('id_satuanproduk', $request->post('id_satuanproduk'))->get()
+        );
+        
+    }
+
+    # edit data satuan produk
+    public function updatesatuanproduk(Request $request){
+        $data = [
+            'nama_satuan' => $request->post('nama_satuan')
+            ];
+    
+        SatuanProdukModel::where('id_satuanproduk', $request->post('id_satuanproduk'))->update($data);
+    
+        return response()->json([
+           'pesan' => 'Berhasil Mengedit Data Satuan Produk'
+        ]);
+        
+    }
+
+    #hapus kategori produk
+    public function deletesatuanproduk(Request $request){
+     
+        SatuanProdukModel::where('id_satuanproduk', $request->post('id_satuanproduk'))->delete();
+
+        return response()->json([
+            'pesan' => 'Berhasil Menghapus Data Satuan Produk'
         ]);
         
     }

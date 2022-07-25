@@ -31,6 +31,6 @@ class EmailResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->from('restuyoviardhika@gmail.com')->subject('Email Reset Password Akun Blanjaloka')->view('web/auth/lupapasswordmail', $this->details);
+        return $this->from('lolipungky@gmail.com')->subject('Email Reset Password Akun Blanjaloka')->view('web/auth/lupapasswordmail', $this->details);
     }
 }

@@ -6,11 +6,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Kategori Produk</h1>
+                        <h1 class="m-0">Data Satuan Produk</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">Data Kategori Produk</li>
+                            <li class="breadcrumb-item active">Data Satuan Produk</li>
                         </ol>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        Data Kategori Produk
+                        Data Satuan Produk
 
                         <div class="float-right d-none d-sm-inline-block">
                             <a href="#" data-toggle="modal" data-target="#addmodal"
@@ -30,28 +30,26 @@
 
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover" id="kategoritable">
+                        <table class="table table-bordered table-hover" id="satuantable">
                             <thead>
                                 <tr>
                                     <th style="width:10px;">No</th>
                                     <th>Kategori</th>
-                                    <th class='notexport'>Icon</th>
                                     <th style="width: 120px">Total Produk</th>
                                     <th style="width:10px;" class='notexport'>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kategori as $no => $k)
+                                @foreach ($satuan as $no => $k)
                                     <tr>
                                         <td>{{ $no + 1 }}</td>
-                                        <td>{{ $k->nama_kategori }}</td>
-                                        <td><img src="{{ asset('assets/admin/icon_kategoriproduk/'. $k->icon_kategori) }}" alt="" width="30px"></td>
-                                        <td>{{count(DB::table('produk')->where('id_kategoriproduk', $k->id_kategoriproduk)->get()).' Produk'}}</td>
+                                        <td>{{ $k->nama_satuan }}</td>
+                                        <td>{{count(DB::table('produk')->where('id_satuanproduk', $k->id_satuanproduk)->get()).' Produk'}}</td>
                                         <td class="text-center">
-                                            <a href="#" data-id="<?= $k->id_kategori ?>" class="edit" data-toggle="tooltip" title="Edit" data-placement="top">
+                                            <a href="#" data-id="<?= $k->id_satuanproduk ?>" class="edit" data-toggle="tooltip" title="Edit" data-placement="top">
                                                 <span class="badge badge-success"><i class="fas fa-edit"></i></span>
                                             </a>
-                                            <a href="#" data-id="<?= $k->id_kategori ?>" class="delete" data-toggle="tooltip" title="Hapus" data-placement="top">
+                                            <a href="#" data-id="<?= $k->id_satuanproduk ?>" class="delete" data-toggle="tooltip" title="Hapus" data-placement="top">
                                                 <span class="badge badge-danger"><i class="fas fa-trash"></i></span>
                                             </a>
                                         </td>
@@ -66,13 +64,13 @@
         </section>
     </div>
 
-    {{-- Modal Tambah Pemda --}}
+    {{-- Modal Tambah Satuan --}}
 
     <div class="modal fade" id="addmodal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Kategori Produk</h4>
+                    <h4 class="modal-title">Tambah Satuan Produk</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,20 +79,13 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3 row">
-                            <label for="nama_kategori" class="col-sm-2 col-form-label">Kategori</label>
+                            <label for="nama_satuan" class="col-sm-2 col-form-label">Satuan</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama_kategori"
-                                    placeholder="Masukkan kategori Misal : Sayur" required>
+                                <input type="text" class="form-control" name="nama_satuan"
+                                    placeholder="Masukkan Satuan Misal : gram" required>
                             </div>
                         </div>
 
-                        <div class="mb-3 row">
-                            <label for="icon_kategori" class="col-sm-2 col-form-label">Icon</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control filefoto" required accept=".png,.jpg,.svg"
-                                    name="icon_kategori" required>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">
@@ -107,33 +98,26 @@
         </div>
     </div>
 
-    {{-- Modal Edit Pemda --}}
+    {{-- Modal Edit Satuan --}}
 
     <div class="modal fade" id="editmodal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Kategori Produk</h4>
+                    <h4 class="modal-title">Edit Satuan Produk</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form id="editform" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id_kategori" id="id_kategori">
+                    <input type="hidden" name="id_satuanproduk" id="id_satuanproduk">
                     <div class="modal-body">
                         <div class="mb-3 row">
-                            <label for="nama_kategori" class="col-sm-2 col-form-label">Kategori</label>
+                            <label for="nama_satuan" class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama_kategori" id="nama_kategori"
-                                    placeholder="No KTP" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label for="icon_kategori" class="col-sm-2 col-form-label">Icon</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="form-control" name="icon_kategori">
+                                <input type="text" class="form-control" name="nama_satuan" id="nama_satuan"
+                                    placeholder="Satuan" required>
                             </div>
                         </div>
                     </div>
@@ -154,7 +138,7 @@
 
             $('[data-toggle="tooltip"]').tooltip();
 
-            $('#kategoritable').DataTable({
+            $('#satuantable').DataTable({
                 "responsive": true,
                 dom: 'Bfrtip',
                 buttons: [{
@@ -194,7 +178,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: "{{ url('admin/produk/kategori/insert') }}",
+                    url: "{{ url('admin/produk/satuan/insert') }}",
                     type: "POST",
                     data: new FormData(this),
                     dataType: 'JSON',
@@ -226,15 +210,14 @@
                 e.preventDefault();
                 $.ajax({
                     data: {
-                        'id_kategori': $(this).data('id'),
+                        'id_satuanproduk': $(this).data('id'),
                         '_token': "{{ csrf_token() }}"
                     },
                     type: 'POST',
-                    url: "{{ url('admin/produk/kategori/get') }}",
+                    url: "{{ url('admin/produk/satuan/get') }}",
                     success: function(data) {
-                        $('#id_kategori').val(data[0].id_kategori);
-                        $('#nama_kategori').val(data[0].nama_kategori);
-                        $('.icon_kategori').val(data[0].icon_kategori);
+                        $('#id_satuanproduk').val(data[0].id_satuanproduk);
+                        $('#nama_satuan').val(data[0].nama_satuan);
 
                         $('#editmodal').modal('show');
                     },
@@ -252,7 +235,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: "{{ url('admin/produk/kategori/update') }}",
+                    url: "{{ url('admin/produk/satuan/update') }}",
                     type: "POST",
                     data: new FormData(this),
                     dataType: 'JSON',
@@ -281,17 +264,17 @@
             // hapus form
             $('.delete').click(function(e) {
                 e.preventDefault();
-                var confirmed = confirm('Hapus Kategori Produk Ini ?');
+                var confirmed = confirm('Hapus Satuan Produk Ini ?');
 
                 if (confirmed) {
 
                     $.ajax({
                         data: {
-                            'id_kategori': $(this).data('id'),
+                            'id_satuanproduk': $(this).data('id'),
                             '_token': "{{ csrf_token() }}"
                         },
                         type: 'POST',
-                        url: "{{ url('admin/produk/kategori/delete') }}",
+                        url: "{{ url('admin/produk/satuan/delete') }}",
                         success: function(data) {
                             swal(data.pesan)
                                 .then((result) => {

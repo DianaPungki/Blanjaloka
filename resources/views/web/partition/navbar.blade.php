@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="{{url('/')}}">
+        <a class="navbar-brand" href="{{url('/index')}}">
         <img 
         src="{{asset('assets/blanjaloka/img/blanjaloka.png')}}" 
         alt="" 
@@ -32,7 +32,7 @@
 
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-            <a class="btn cai-color-text fs-3 m-1 ms-3" id="keranjang"><i class="bi bi-cart3"></i></a>
+            <a href="{{ url('keranjang') }}" class="btn cai-color-text fs-3 m-1 ms-3" id="keranjang"><i class="bi bi-cart3"></i></a>
             <a class="garisBatas fs-3 text-secondary align-middle me-3">|</a>
             <a class="btn bi bi-bell-fill cai-color-text m-1 fs-5" id="buttonMasuk" aria-current="page" href="notifikasi.html"><span class="ms-2 fs-6 align-middle">Notifikasi</span></a>
             
@@ -43,9 +43,9 @@
                 <ul class="dropdown-menu p-3 mt-0 mt-xl-4" aria-labelledby="dropdownUser">
                     <li><span class="dropdown-item-text fw-bold">Halo, {{session()->get('nama_user')}}</span></li>
                     <li><a class="dropdown-item" target="_blank" href="{{url('sellers/daftar')}}">Toko Saya</a></li>
-                  <li><a class="dropdown-item" href="#">Favorit</a></li>
+                  <li><a class="dropdown-item" href="{{ url('favorit') }}">Favorit Saya</a></li>
                   <li><a class="dropdown-item" href="#">Daftar Belanja</a></li>
-                  <li><a class="dropdown-item" href="#">Pesanan Saya</a></li>
+                  <li><a class="dropdown-item" href="{{ url('order') }}">Pesanan Saya</a></li>
                   <li><a class="dropdown-item" href="{{url('setting/profil')}}">Pengaturan</a></li>
                   <li><a class="dropdown-item" href="{{url('logout')}}">Keluar</a></li>
                 </ul>
